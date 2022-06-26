@@ -4,9 +4,8 @@ import AnimeSearch.security.AvatarHelper;
 import AnimeSearch.views.about.AboutView;
 //import AnimeSearch.views.logout.LogoutView;
 import AnimeSearch.cache.Cache;
-import AnimeSearch.views.books.BooksView;
+import AnimeSearch.views.books.AnimeView;
 //import AnimeSearch.views.favorites.FavoritesView;
-import AnimeSearch.views.favorites.FavoritesView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -39,19 +38,18 @@ import java.util.Optional;
  * The main view is a top-level placeholder for other views.
  */
 @Push
-@PWA(name = "GoogleBooksDatabase", shortName = "GoogleBooksDb", enableInstallPrompt = false)
+@PWA(name = "AnimeSearchDatabase", shortName = "AnimeSearchDb", enableInstallPrompt = false)
 @JsModule("./styles/shared-styles.js")
 @Theme(value = Lumo.class, variant = Lumo.DARK)
 @CssImport("./views/main.css")
 public class MainView extends AppLayout  {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AppLayout.class);
-
     private final Tabs menu;
     private H1 viewTitle;
 
     public MainView(@Value("${authentication}") boolean authenticationEnabled) {
-        setPrimarySection(Section.DRAWER);
+        setPrimarySection(Section.DRAWER); // Defines whether navbar or drawer will come first visually.
         addToNavbar(true, createHeaderContent());
         menu = createMenu(authenticationEnabled);
         addToDrawer(createDrawerContent(menu));
@@ -64,12 +62,16 @@ public class MainView extends AppLayout  {
         layout.getThemeList().set("dark", true);
         layout.setSpacing(false);
         layout.add(new DrawerToggle());
-        viewTitle = new H1();
-        layout.add(viewTitle);
-        Span user = new Span("Hello, " + Cache.getInstance().getEmail());
-        user.setClassName("user");
-        layout.add(user);
 
+        viewTitle = new H1();
+        //viewTitle will be dynamically updated when menu/Tabs are set to the corresponding tab, which will update
+        //Page title and viewTitle
+        layout.add(viewTitle);
+
+        Span user = new Span("Hello, "+ Cache.getInstance().getEmail()); //cache.getEmail()
+        user.setClassName("user");
+        layout.add(user); //the email address
+        //try to get the avatar based on (hashcode of) user email address
         try {
             layout.add(new Avatar(StringUtils.EMPTY, String.format("%s %s", AvatarHelper.BASE64_PREFIX,
                     AvatarHelper.createBase64Avatar(Math.abs(Cache.getInstance().getEmail().hashCode())))));
@@ -89,7 +91,7 @@ public class MainView extends AppLayout  {
         HorizontalLayout logoLayout = new HorizontalLayout();
         logoLayout.setId("logo");
         logoLayout.add(new Image("images/logo.png", "vaadinApp logo"));
-        logoLayout.add(new H1("Book Search App"));
+        logoLayout.add(new H1("Anime Search App"));
         layout.add(logoLayout, menu);
         return layout;
     }
@@ -109,9 +111,11 @@ public class MainView extends AppLayout  {
     }
 
     private Component[] createMenuItems() {
-//        return new Tab[]{createTab("Book Search", BooksView.class), createTab("Favorites", FavoritesView.class),
-//                createTab("About Us", AboutView.class)};
-        return new Tab[]{createTab("Book Search", BooksView.class), createTab("About Us", AboutView.class)};
+        return new Tab[]{
+                createTab("Anime Search", AnimeView.class),
+                //createTab("Favorites", FavoritesView.class),
+                createTab("About Us", AboutView.class)
+        };
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {

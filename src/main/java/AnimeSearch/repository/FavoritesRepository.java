@@ -1,6 +1,7 @@
 package AnimeSearch.repository;
 
 import AnimeSearch.cache.Cache;
+import AnimeSearch.models.FavoriteItem;
 import AnimeSearch.models.FavoriteItemBook;
 import AnimeSearch.service.ResponseCallback;
 import com.vaadin.flow.component.UI;
@@ -21,35 +22,36 @@ import java.util.concurrent.Executors;
 public class FavoritesRepository {
     private final ExecutorService executorService = Executors.newFixedThreadPool(3);
 
-    //make sure to add your full container-url-connection-string to the IntelliJ confuguration
+    //make sure to add your full container-url-connection-string to the IntelliJ configuration
     //QUARKUS_BASE_URL :: https://container-service-22.9r4o895c5nvr8.us-east-2.cs.amazonlightsail.com/
     //If you are deploying to beanstalk, place in software || environmental properties.
     @Value("${QUARKUS_BASE_URL:#{'localhost:8080/'}}")
     private String baseUrl;
 
-    public void getFavoritesPaged(ResponseCallback<List<FavoriteItemBook>> callback, int page) {
+    public void getFavoritesPaged(ResponseCallback<List<FavoriteItem>> callback, int page) {
 
         String email = Cache.getInstance().getEmail();
+        System.out.println(email); //added
 
         String raw = baseUrl + "/wish/paged/" + email + "/%d";
         String formatted = String.format(raw, page);
         WebClient.RequestHeadersSpec<?> spec = WebClient.create().get()
                 .uri(formatted);
 
-        spec.retrieve().bodyToMono(new ParameterizedTypeReference<List<FavoriteItemBook>>() {
+        spec.retrieve().bodyToMono(new ParameterizedTypeReference<List<FavoriteItem>>() {
         }).publishOn(Schedulers.fromExecutor(executorService)).subscribe(results -> callback.operationFinished(results));
     }
 
 
-    public void deleteFavoriteById(UI ui, ResponseCallback<FavoriteItemBook> callback, String id) {
+    public void deleteFavoriteById(UI ui, ResponseCallback<FavoriteItem> callback, String id) {
 
         String email = Cache.getInstance().getEmail();
         String raw = baseUrl + "/wish/" + email + "/%s";
         String formatted = String.format(raw, id);
-        Mono<FavoriteItemBook> mono = WebClient.create().delete()
+        Mono<FavoriteItem> mono = WebClient.create().delete()
                 .uri(formatted)
                 .retrieve()
-                .bodyToMono(FavoriteItemBook.class);
+                .bodyToMono(FavoriteItem.class);
 
         mono
                 .doOnError(throwable -> ui.access(() -> {
@@ -63,15 +65,15 @@ public class FavoritesRepository {
     }
 
 
-    public void addFavorite(UI ui, ResponseCallback<FavoriteItemBook> callback, FavoriteItemBook favoriteAdd) {
+    public void addFavorite(UI ui, ResponseCallback<FavoriteItem> callback, FavoriteItem favoriteAdd) {
 
         String formatted = baseUrl + "/wish";
-        Mono<FavoriteItemBook> mono = WebClient.create().post()
+        Mono<FavoriteItem> mono = WebClient.create().post()
 
                 .uri(formatted)
-                .body(Mono.just(favoriteAdd), FavoriteItemBook.class)
+                .body(Mono.just(favoriteAdd), FavoriteItem.class)
                 .retrieve()
-                .bodyToMono(FavoriteItemBook.class);
+                .bodyToMono(FavoriteItem.class);
 
         mono
                 .doOnError(throwable -> {
@@ -79,7 +81,7 @@ public class FavoritesRepository {
                     switch (((WebClientResponseException.UnsupportedMediaType) throwable).getStatusCode().value()){
                         case 415:
                             message = "This book is already in your favorites.";
-                        break;
+                            break;
                         default:
                             message = "There was an error: " + throwable.getMessage();
 
@@ -96,7 +98,6 @@ public class FavoritesRepository {
                 .subscribe(results -> callback.operationFinished(results));
 
     }
-
 
 
 }

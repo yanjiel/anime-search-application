@@ -1,6 +1,7 @@
 package AnimeSearch.cache;
 
 
+import AnimeSearch.models.FavoriteItem;
 import AnimeSearch.models.FavoriteItemBook;
 
 import java.util.ArrayList;
@@ -10,11 +11,11 @@ import java.util.stream.Stream;
 public class Cache {
 
     private String keyword = "";
-    private List<FavoriteItemBook> items = new ArrayList<>();
-    private FavoriteItemBook detailItem;
+    private List<FavoriteItem> items = new ArrayList<>(); //list of favoriteItems = list of (items + userEmail)
+    private FavoriteItem detailItem; // one favoriteItem
     private int offset;
     private boolean favMode;
-    private String email = "anon@default.com";
+    private String email = "anon@default.com"; //default email
 
     private static Cache cache;
 
@@ -37,11 +38,11 @@ public class Cache {
 
     }
 
-    public Stream<FavoriteItemBook> streamItems() {
+    public Stream<FavoriteItem> streamItems() {
         return items.stream();
-    }
+    } //favoriteItems are serializable
 
-    public void addItems(List<FavoriteItemBook> items) {
+    public void addItems(List<FavoriteItem> items) {
         this.items.addAll(items);
     }
 
@@ -53,11 +54,11 @@ public class Cache {
         return items.size();
     }
 
-    public FavoriteItemBook getDetailItem() {
+    public FavoriteItem getDetailItem() {
         return detailItem;
     }
 
-    public void setDetailItem(FavoriteItemBook detailItem) {
+    public void setDetailItem(FavoriteItem detailItem) {
         this.detailItem = detailItem;
     }
 

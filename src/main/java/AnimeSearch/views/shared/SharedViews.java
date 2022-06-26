@@ -1,7 +1,8 @@
 package AnimeSearch.views.shared;
 
 
-import AnimeSearch.models.FavoriteItemBook;
+import AnimeSearch.models.FavoriteItem;
+//import AnimeSearch.models.FavoriteItemBook;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
@@ -12,7 +13,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 @CssImport("./views/shared-views.css")
 public class SharedViews {
 
-    public static VerticalLayout getDetail(FavoriteItemBook favorite, boolean favMode) {
+    public static VerticalLayout getDetail(FavoriteItem favorite, boolean favMode) {
         VerticalLayout detail = new VerticalLayout();
         detail.setSpacing(false);
         detail.setPadding(false);
@@ -30,20 +31,20 @@ public class SharedViews {
 
         Span title = getProperSpan(favorite.getTitle());
         title.addClassNames("text", "title");
-        Span author = getProperSpan(favorite.getAuthorName());
-        author.addClassName("text");
-        Span desc = getProperSpan(favorite.getDescription());
-        desc.addClassName("text");
+        Span type = getProperSpan(favorite.getType());
+        type.addClassName("text");
+        Span synopsis = getProperSpan(favorite.getSynopsis());
+        synopsis.addClassName("text");
         Span email = getProperSpan(favorite.getUserEmail());
         email.addClassName("text");
-        Span year = getProperSpan(favorite.getYear());
-        year.addClassName("text");
+        Span score = getProperSpan(favorite.getScore());
+        score.addClassName("text");
 
         if (favMode) {
             detail.addClassName("fav-mode");
-            verticalLayout.add(title, author, year, email, desc);
+            verticalLayout.add(title, type, score, email, synopsis);
         } else {
-            verticalLayout.add(title, author, year, desc);
+            verticalLayout.add(title, type, score, synopsis);
         }
         detail.add(tab, image, verticalLayout);
 
@@ -51,7 +52,7 @@ public class SharedViews {
     }
 
 
-    public static HorizontalLayout getCard(FavoriteItemBook favorite, boolean favMode) {
+    public static HorizontalLayout getCard(FavoriteItem favorite, boolean favMode) {
         HorizontalLayout card = new HorizontalLayout();
         card.addClassName("card");
         card.setSpacing(false);
@@ -69,21 +70,21 @@ public class SharedViews {
 
         Span title = getProperSpan(favorite.getTitle());
         title.addClassNames("text", "title");
-        Span author = getProperSpan(favorite.getAuthorName());
-        author.addClassName("text");
-        Span desc = getProperSpan(favorite.getDescription());
-        desc.addClassName("text");
+        Span type = getProperSpan(favorite.getType());
+        type.addClassName("text");
+        Span synopsis = getProperSpan(favorite.getSynopsis());
+        synopsis.addClassName("text");
         Span email = getProperSpan(favorite.getUserEmail());
         email.addClassName("text");
-        Span year = getProperSpan(favorite.getYear());
-        year.addClassName("text");
+        Span score = getProperSpan(favorite.getScore());
+        score.addClassName("text");
 
 
         if (favMode) {
-            verticalLayout.add(title, author, year, email);
+            verticalLayout.add(title, type, score, email);
             card.add(tab, image, verticalLayout);
         } else {
-            verticalLayout.add(title, author, year);
+            verticalLayout.add(title, type, score);
             card.add(image, verticalLayout);
         }
 

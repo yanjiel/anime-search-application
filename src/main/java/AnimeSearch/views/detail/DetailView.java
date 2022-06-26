@@ -17,7 +17,7 @@ import com.vaadin.flow.router.Route;
 @CssImport("./views/detail.css")
 public class DetailView extends Div {
 
-    private Button favoriteAction = new Button();
+    //    private Button favoriteAction = new Button();
     private Button goBack = new Button();
     private FavoritesService favoritesService;
 
@@ -63,7 +63,7 @@ public class DetailView extends Div {
 //        }, favorite);
 //
 //    }
-//
+
 //    public void deleteFavorite(String id) {
 //        favoritesService.deleteFavoriteById(UI.getCurrent(), favoriteDelete -> {
 //            getUI().get().access(() -> {

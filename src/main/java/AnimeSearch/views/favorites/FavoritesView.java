@@ -2,6 +2,7 @@ package AnimeSearch.views.favorites;
 
 
 import AnimeSearch.cache.Cache;
+import AnimeSearch.models.FavoriteItem;
 import AnimeSearch.models.FavoriteItemBook;
 import AnimeSearch.service.FavoritesService;
 import AnimeSearch.views.main.MainView;
@@ -27,23 +28,26 @@ import java.util.List;
 public class FavoritesView extends Div implements AfterNavigationObserver {
     public static int MAX_RESULTS = 20;
     private FavoritesService favoritesService;
-    private Grid<FavoriteItemBook> grid = new Grid<>();
+
+    //again favoriteItem is a serializable object with all fields of Item class plus userEmail
+    private Grid<FavoriteItem> grid = new Grid<>();
     private int page;
     private boolean isLoading = false;
     private boolean isEnd = false;
 
     //no need to cache these. We will simply re-fetch them each time the user returns to this page
-    private List<FavoriteItemBook> favoriteItems = new ArrayList<>();
+    private List<FavoriteItem> favoriteItems = new ArrayList<>();
 
     public FavoritesView(FavoritesService favoritesService) {
         this.favoritesService = favoritesService;
 
         addClassName("generic-list");
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
+        System.out.println("calling sharedViews.getCard from favouriteView");
         grid.addComponentColumn(favoriteItem -> SharedViews.getCard(favoriteItem, true));
         grid.addItemClickListener(
                 event -> grid.getUI().ifPresent(ui -> {
-
+                            // if user clicks on a favoriteItem in the grid, then opens up detail-view to show details
                             Cache.getInstance().setDetailItem(event.getItem());
                             Cache.getInstance().setFavMode(true);
                             ui.navigate("detail-view");
@@ -91,7 +95,7 @@ public class FavoritesView extends Div implements AfterNavigationObserver {
         }, page);
     }
 
-    private void addItemsToGrid(List<FavoriteItemBook> favoriteResponse, int size) {
+    private void addItemsToGrid(List<FavoriteItem> favoriteResponse, int size) {
         favoriteItems.addAll(favoriteResponse);
         grid.setItems(favoriteItems.stream());
         if (page > 1) {
@@ -101,7 +105,7 @@ public class FavoritesView extends Div implements AfterNavigationObserver {
         }
     }
 
-    private Grid<FavoriteItemBook> withClientsideScrollListener(Grid<FavoriteItemBook> grid) {
+    private Grid<FavoriteItem> withClientsideScrollListener(Grid<FavoriteItem> grid) {
         grid.getElement().executeJs(
                 Utils.getFileFromResourceAsString(this.getClass(), "scrollFunction.js"),
                 getElement());
