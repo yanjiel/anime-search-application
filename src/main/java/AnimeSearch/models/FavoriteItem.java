@@ -16,7 +16,7 @@ public class FavoriteItem implements Serializable {
     private String link; //thumbnail
 
     //factory method
-    public static FavoriteItem fromItem(Item item, String  userEmail){
+    public static FavoriteItem fromItem(ItemBook item, String  userEmail){
         FavoriteItem favoriteItem = new FavoriteItem();
         favoriteItem.setUserEmail(userEmail);
 

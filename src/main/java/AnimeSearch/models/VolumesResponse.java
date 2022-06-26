@@ -16,7 +16,7 @@ public class VolumesResponse {
     private Integer totalItems;
     @SerializedName("items")
     @Expose
-    private List<Item> items = null;
+    private List<ItemBook> items = null;
 
     public String getKind() {
         return kind;
@@ -34,11 +34,11 @@ public class VolumesResponse {
         this.totalItems = totalItems;
     }
 
-    public List<Item> getItems() {
+    public List<ItemBook> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<ItemBook> items) {
         this.items = items;
     }
 
