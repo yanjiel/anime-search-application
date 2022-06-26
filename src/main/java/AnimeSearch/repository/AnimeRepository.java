@@ -1,7 +1,6 @@
 package AnimeSearch.repository;
 
 import AnimeSearch.models.AnimeResponse;
-//import AnimeSearch.models.VolumesResponse;
 import AnimeSearch.service.ResponseCallback;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -12,6 +11,8 @@ public class AnimeRepository {
     private final String BASE = "https://api.jikan.moe/v4/anime?q=%s&limit=%d&page=%d";
     //https://www.googleapis.com/books/v1/volumes?q=%s&maxResults=%d&startIndex=%d
 
+    private AnimeResponse animeResponse;
+
     public void getAnimePaged(ResponseCallback<AnimeResponse> callback, String search, int maxResults,
                               int startPage) {
 
@@ -21,7 +22,7 @@ public class AnimeRepository {
 
         spec
                 .retrieve().toEntity(AnimeResponse.class).subscribe(result -> {
-                    final AnimeResponse animeResponse = result.getBody();
+                    this.animeResponse = result.getBody();
                     if (null == animeResponse || null == animeResponse.getData()) return;
 //            if (null == animeResponse
 //                    || null == animeResponse.getData()
@@ -30,12 +31,15 @@ public class AnimeRepository {
 
                 });
 
-        spec.retrieve().bodyToMono(String.class).subscribe(result -> {
-                    System.out.println(result);
-                    int startIndex = result.indexOf("\"images\":{\"jpg\":{\"image_url\":");
-                    int endIndex = result.indexOf("\"small_image_url\"");
-                    System.out.println(result.substring(startIndex+29, endIndex-1));
-                });
+//        spec.retrieve().bodyToMono(String.class).subscribe(result -> {
+//                    String strStart = "\"images\":{\"jpg\":{\"image_url\":";
+//                    String strEnd = "\"small_image_url\"";
+////                    int startIndex = result.indexOf("\"images\":{\"jpg\":{\"image_url\":");
+////                    int endIndex = result.indexOf("\"small_image_url\"");
+//                    String url = result.substring(result.indexOf(strStart) + strStart.length(), result.indexOf(strEnd)-1)
+//                            .replace("\"","").replace("\\","");
+//                    System.out.println(url);
+//                });
 
     }
 }
