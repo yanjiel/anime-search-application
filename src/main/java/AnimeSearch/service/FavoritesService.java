@@ -1,6 +1,6 @@
 package AnimeSearch.service;
 
-import AnimeSearch.models.FavoriteItem;
+import AnimeSearch.models.FavoriteItemBook;
 import AnimeSearch.repository.FavoritesRepository;
 import com.vaadin.flow.component.UI;
 import org.springframework.stereotype.Service;
@@ -19,19 +19,19 @@ public class FavoritesService extends ResponseEntityExceptionHandler {
     }
 
 
-    public void getFavoritesPaged(ResponseCallback<List<FavoriteItem>> callback,
+    public void getFavoritesPaged(ResponseCallback<List<FavoriteItemBook>> callback,
                                   int page) {
         favoritesRepository.getFavoritesPaged(callback, page);
     }
 
 
 
-    public void addFavorite(UI ui, ResponseCallback<FavoriteItem> callback,
-                            FavoriteItem favorite)  {
+    public void addFavorite(UI ui, ResponseCallback<FavoriteItemBook> callback,
+                            FavoriteItemBook favorite)  {
         favoritesRepository.addFavorite(ui, callback, favorite);
     }
 
-    public void deleteFavoriteById(UI ui, ResponseCallback<FavoriteItem> callback,
+    public void deleteFavoriteById(UI ui, ResponseCallback<FavoriteItemBook> callback,
                                    String id) {
         favoritesRepository.deleteFavoriteById(ui, callback, id);
     }

@@ -1,17 +1,13 @@
 package AnimeSearch.views.detail;
 
 import AnimeSearch.cache.Cache;
-import AnimeSearch.models.FavoriteItem;
 import AnimeSearch.service.FavoritesService;
 import AnimeSearch.views.main.MainView;
 import AnimeSearch.views.shared.SharedViews;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;

@@ -1,7 +1,7 @@
 package AnimeSearch.repository;
 
 import AnimeSearch.cache.Cache;
-import AnimeSearch.models.FavoriteItem;
+import AnimeSearch.models.FavoriteItemBook;
 import AnimeSearch.service.ResponseCallback;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.notification.Notification;
@@ -27,7 +27,7 @@ public class FavoritesRepository {
     @Value("${QUARKUS_BASE_URL:#{'localhost:8080/'}}")
     private String baseUrl;
 
-    public void getFavoritesPaged(ResponseCallback<List<FavoriteItem>> callback, int page) {
+    public void getFavoritesPaged(ResponseCallback<List<FavoriteItemBook>> callback, int page) {
 
         String email = Cache.getInstance().getEmail();
 
@@ -36,20 +36,20 @@ public class FavoritesRepository {
         WebClient.RequestHeadersSpec<?> spec = WebClient.create().get()
                 .uri(formatted);
 
-        spec.retrieve().bodyToMono(new ParameterizedTypeReference<List<FavoriteItem>>() {
+        spec.retrieve().bodyToMono(new ParameterizedTypeReference<List<FavoriteItemBook>>() {
         }).publishOn(Schedulers.fromExecutor(executorService)).subscribe(results -> callback.operationFinished(results));
     }
 
 
-    public void deleteFavoriteById(UI ui, ResponseCallback<FavoriteItem> callback, String id) {
+    public void deleteFavoriteById(UI ui, ResponseCallback<FavoriteItemBook> callback, String id) {
 
         String email = Cache.getInstance().getEmail();
         String raw = baseUrl + "/wish/" + email + "/%s";
         String formatted = String.format(raw, id);
-        Mono<FavoriteItem> mono = WebClient.create().delete()
+        Mono<FavoriteItemBook> mono = WebClient.create().delete()
                 .uri(formatted)
                 .retrieve()
-                .bodyToMono(FavoriteItem.class);
+                .bodyToMono(FavoriteItemBook.class);
 
         mono
                 .doOnError(throwable -> ui.access(() -> {
@@ -63,15 +63,15 @@ public class FavoritesRepository {
     }
 
 
-    public void addFavorite(UI ui, ResponseCallback<FavoriteItem> callback, FavoriteItem favoriteAdd) {
+    public void addFavorite(UI ui, ResponseCallback<FavoriteItemBook> callback, FavoriteItemBook favoriteAdd) {
 
         String formatted = baseUrl + "/wish";
-        Mono<FavoriteItem> mono = WebClient.create().post()
+        Mono<FavoriteItemBook> mono = WebClient.create().post()
 
                 .uri(formatted)
-                .body(Mono.just(favoriteAdd), FavoriteItem.class)
+                .body(Mono.just(favoriteAdd), FavoriteItemBook.class)
                 .retrieve()
-                .bodyToMono(FavoriteItem.class);
+                .bodyToMono(FavoriteItemBook.class);
 
         mono
                 .doOnError(throwable -> {

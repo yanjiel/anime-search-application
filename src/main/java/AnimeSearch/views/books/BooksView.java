@@ -1,7 +1,7 @@
 package AnimeSearch.views.books;
 
 import AnimeSearch.cache.Cache;
-import AnimeSearch.models.FavoriteItem;
+import AnimeSearch.models.FavoriteItemBook;
 import AnimeSearch.service.GoogleBooksService;
 import AnimeSearch.views.main.MainView;
 import AnimeSearch.views.shared.SharedViews;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class BooksView extends Div implements AfterNavigationObserver {
     public static int MAX_RESULTS = 20;
     private GoogleBooksService googleBooksService;
-    private Grid<FavoriteItem> grid = new Grid<>();
+    private Grid<FavoriteItemBook> grid = new Grid<>();
     private boolean isLoading = false;
     private TextField keyWord;
     private Notification loading = new Notification("Loading...", 1000, Notification.Position.BOTTOM_CENTER);
@@ -85,7 +85,7 @@ public class BooksView extends Div implements AfterNavigationObserver {
                 //1. collect a list of favoriteItems and add to cache
                 Cache.getInstance().addItems(volResp.getItems()
                         .stream()
-                        .map( item -> FavoriteItem.fromItem(item, Cache.getInstance().getEmail()))
+                        .map( item -> FavoriteItemBook.fromItem(item, Cache.getInstance().getEmail()))
                         .collect(Collectors.toList())
                 );
                 // 2. add the list of favoriteItems to grid (from cache), and move the offset
@@ -103,7 +103,7 @@ public class BooksView extends Div implements AfterNavigationObserver {
     }
 
 
-    private Grid<FavoriteItem> withClientsideScrollListener(Grid<FavoriteItem> grid) {
+    private Grid<FavoriteItemBook> withClientsideScrollListener(Grid<FavoriteItemBook> grid) {
         grid.getElement().executeJs(
                 Utils.getFileFromResourceAsString(this.getClass(), "scrollFunction.js"),
                 getElement());

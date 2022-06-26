@@ -1,7 +1,7 @@
 package AnimeSearch.views.shared;
 
 
-import AnimeSearch.models.FavoriteItem;
+import AnimeSearch.models.FavoriteItemBook;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
@@ -12,7 +12,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 @CssImport("./views/shared-views.css")
 public class SharedViews {
 
-    public static VerticalLayout getDetail(FavoriteItem favorite, boolean favMode) {
+    public static VerticalLayout getDetail(FavoriteItemBook favorite, boolean favMode) {
         VerticalLayout detail = new VerticalLayout();
         detail.setSpacing(false);
         detail.setPadding(false);
@@ -51,7 +51,7 @@ public class SharedViews {
     }
 
 
-    public static HorizontalLayout getCard(FavoriteItem favorite, boolean favMode) {
+    public static HorizontalLayout getCard(FavoriteItemBook favorite, boolean favMode) {
         HorizontalLayout card = new HorizontalLayout();
         card.addClassName("card");
         card.setSpacing(false);

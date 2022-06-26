@@ -2,7 +2,7 @@ package AnimeSearch.views.favorites;
 
 
 import AnimeSearch.cache.Cache;
-import AnimeSearch.models.FavoriteItem;
+import AnimeSearch.models.FavoriteItemBook;
 import AnimeSearch.service.FavoritesService;
 import AnimeSearch.views.main.MainView;
 import AnimeSearch.views.shared.SharedViews;
@@ -27,13 +27,13 @@ import java.util.List;
 public class FavoritesView extends Div implements AfterNavigationObserver {
     public static int MAX_RESULTS = 20;
     private FavoritesService favoritesService;
-    private Grid<FavoriteItem> grid = new Grid<>();
+    private Grid<FavoriteItemBook> grid = new Grid<>();
     private int page;
     private boolean isLoading = false;
     private boolean isEnd = false;
 
     //no need to cache these. We will simply re-fetch them each time the user returns to this page
-    private List<FavoriteItem> favoriteItems = new ArrayList<>();
+    private List<FavoriteItemBook> favoriteItems = new ArrayList<>();
 
     public FavoritesView(FavoritesService favoritesService) {
         this.favoritesService = favoritesService;
@@ -91,7 +91,7 @@ public class FavoritesView extends Div implements AfterNavigationObserver {
         }, page);
     }
 
-    private void addItemsToGrid(List<FavoriteItem> favoriteResponse, int size) {
+    private void addItemsToGrid(List<FavoriteItemBook> favoriteResponse, int size) {
         favoriteItems.addAll(favoriteResponse);
         grid.setItems(favoriteItems.stream());
         if (page > 1) {
@@ -101,7 +101,7 @@ public class FavoritesView extends Div implements AfterNavigationObserver {
         }
     }
 
-    private Grid<FavoriteItem> withClientsideScrollListener(Grid<FavoriteItem> grid) {
+    private Grid<FavoriteItemBook> withClientsideScrollListener(Grid<FavoriteItemBook> grid) {
         grid.getElement().executeJs(
                 Utils.getFileFromResourceAsString(this.getClass(), "scrollFunction.js"),
                 getElement());
