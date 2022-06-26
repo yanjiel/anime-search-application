@@ -3,7 +3,7 @@ package AnimeSearch.views.favorites;
 
 import AnimeSearch.cache.Cache;
 import AnimeSearch.models.FavoriteItem;
-import AnimeSearch.models.FavoriteItemBook;
+//import AnimeSearch.models.FavoriteItemBook;
 import AnimeSearch.service.FavoritesService;
 import AnimeSearch.views.main.MainView;
 import AnimeSearch.views.shared.SharedViews;

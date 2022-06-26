@@ -1,7 +1,7 @@
 package AnimeSearch.service;
 
 import AnimeSearch.models.FavoriteItem;
-import AnimeSearch.models.FavoriteItemBook;
+//import AnimeSearch.models.FavoriteItemBook;
 import AnimeSearch.repository.FavoritesRepository;
 import com.vaadin.flow.component.UI;
 import org.springframework.stereotype.Service;

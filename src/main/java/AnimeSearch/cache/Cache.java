@@ -2,7 +2,7 @@ package AnimeSearch.cache;
 
 
 import AnimeSearch.models.FavoriteItem;
-import AnimeSearch.models.FavoriteItemBook;
+//import AnimeSearch.models.FavoriteItemBook;
 
 import java.util.ArrayList;
 import java.util.List;
