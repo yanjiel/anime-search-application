@@ -2,8 +2,11 @@ package AnimeSearch.repository;
 
 import AnimeSearch.models.AnimeResponse;
 import AnimeSearch.service.ResponseCallback;
+//import net.minidev.json.JSONObject;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.Arrays;
 
 @Repository
 public class AnimeRepository {
@@ -20,26 +23,24 @@ public class AnimeRepository {
         String formatted = String.format(BASE, search, maxResults, startPage);
         WebClient.RequestHeadersSpec<?> spec = WebClient.create().get().uri(formatted);
 
-        spec
-                .retrieve().toEntity(AnimeResponse.class).subscribe(result -> {
+        spec.retrieve().toEntity(AnimeResponse.class).subscribe(result -> {
                     this.animeResponse = result.getBody();
                     if (null == animeResponse || null == animeResponse.getData()) return;
 //            if (null == animeResponse
 //                    || null == animeResponse.getData()
 //                    || animeResponse.getPagination().getStats().getCount() <= 0) return;
-                    callback.operationFinished(animeResponse);
-
+//                    callback.operationFinished(animeResponse);
                 });
 
-//        spec.retrieve().bodyToMono(String.class).subscribe(result -> {
-//                    String strStart = "\"images\":{\"jpg\":{\"image_url\":";
-//                    String strEnd = "\"small_image_url\"";
-////                    int startIndex = result.indexOf("\"images\":{\"jpg\":{\"image_url\":");
-////                    int endIndex = result.indexOf("\"small_image_url\"");
-//                    String url = result.substring(result.indexOf(strStart) + strStart.length(), result.indexOf(strEnd)-1)
-//                            .replace("\"","").replace("\\","");
-//                    System.out.println(url);
-//                });
+        spec.retrieve().bodyToMono(String.class).subscribe(result -> {
+            String[] urls = result.split("\"jpg\":");
+            String[] urls_2 = Arrays.copyOfRange(result.split("\"jpg\":"),1,urls.length+1 );
+
+            for (String url: urls_2) {
+                System.out.println(url);
+            }
+            callback.operationFinished(animeResponse);
+        });
 
     }
 }

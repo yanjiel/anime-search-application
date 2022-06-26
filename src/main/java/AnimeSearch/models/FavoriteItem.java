@@ -36,24 +36,13 @@ public class FavoriteItem implements Serializable {
         favoriteItem.setTitle(null == item.getTitle() ? "" : item.getTitle());
         favoriteItem.setType(null == item.getType() ? "" : item.getType());
         favoriteItem.setScore((null == item.getScore()|| item.getScore() <= 0 ) ? "" : String.valueOf(item.getScore()));
-
         favoriteItem.setSynopsis(null == item.getSynopsis() ? "": item.getSynopsis());
+
         // set the thumbnail/link
-
 //        System.out.println(item.getImages().getJpg().getImageUrl());
-//        System.out.println(item.getImages().getJpg().getSmallImageUrl());
-//        System.out.println(item.getImages().getJpg().getLargeImageUrl());
-//        System.out.println(item.getImages().getWebp().getImageUrl());
-//        System.out.println(item.getImages().getWebp().getSmallImageUrl());
-//        System.out.println(item.getImages().getWebp().getLargeImageUrl());
-//        System.out.println(item.getTrailer().getImages().getImageUrl());
-//        System.out.println(item.getTrailer().getImages().getSmallImageUrl());
-//        System.out.println(item.getTrailer().getImages().getMediumImageUrl());
-//        System.out.println(item.getTrailer().getImages().getLargeImageUrl());
-//        System.out.println(item.getTrailer().getImages().getMaximumImageUrl());
 
-        if( null != item.getTitle() && null != item.getImages().getJpg().getSmallImageUrl()){
-            favoriteItem.setLink(item.getImages().getJpg().getSmallImageUrl());
+        if( null != item.getTitle() && null != item.getImages().getJpg().getImageUrl()){
+            favoriteItem.setLink(item.getImages().getJpg().getImageUrl());
         } else {
             Random rand = new Random();
             int rand_int = rand.nextInt(399) + 1;
