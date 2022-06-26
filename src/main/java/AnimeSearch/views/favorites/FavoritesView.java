@@ -43,7 +43,7 @@ public class FavoritesView extends Div implements AfterNavigationObserver {
 
         addClassName("generic-list");
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
-        System.out.println("calling sharedViews.getCard from favouriteView");
+//        System.out.println("calling sharedViews.getCard from favouriteView");
         grid.addComponentColumn(favoriteItem -> SharedViews.getCard(favoriteItem, true));
         grid.addItemClickListener(
                 event -> grid.getUI().ifPresent(ui -> {

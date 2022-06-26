@@ -71,7 +71,7 @@ public class AnimeView extends Div implements AfterNavigationObserver {
             grid.setItems(Cache.getInstance().streamItems()); //cache.streamItems returns a Stream<FavoriteItem>
 
         keyWord.setValue(Cache.getInstance().getKeyword()); //set the value of the TextField
-        System.out.println("search keyword is: " + keyWord.getValue());
+//        System.out.println("search keyword is: " + keyWord.getValue());
 
     }
 

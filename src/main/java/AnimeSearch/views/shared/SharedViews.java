@@ -25,7 +25,7 @@ public class SharedViews {
 
         Image image = new Image();
 
-        System.out.println("getDetail: " + favorite.getLink());///////////////////////////////////////////
+//        System.out.println("getDetail: " + favorite.getLink());///////////////////////////////////////////
         Random rand = new Random();
         int rand_int = rand.nextInt(399)+1;
 
@@ -67,7 +67,7 @@ public class SharedViews {
         tab.addClassName("tab");
         Image image = new Image();
 
-        System.out.println("getCard: " + favorite.getLink());////////////////////////////////////////
+//        System.out.println("getCard: " + favorite.getLink());////////////////////////////////////////
         image.setSrc(null == favorite.getLink() ? "https://picsum.photos/200/300" : favorite.getLink());
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.addClassName("vertical-layout");

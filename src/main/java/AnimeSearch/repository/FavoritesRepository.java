@@ -31,7 +31,7 @@ public class FavoritesRepository {
     public void getFavoritesPaged(ResponseCallback<List<FavoriteItem>> callback, int page) {
 
         String email = Cache.getInstance().getEmail();
-        System.out.println(email); //added
+//        System.out.println(email); //added
 
         String raw = baseUrl + "/wish/paged/" + email + "/%d";
         String formatted = String.format(raw, page);

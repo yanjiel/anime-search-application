@@ -21,7 +21,6 @@ public class AnimeRepository {
 
         spec
                 .retrieve().toEntity(AnimeResponse.class).subscribe(result -> {
-
                     final AnimeResponse animeResponse = result.getBody();
                     if (null == animeResponse || null == animeResponse.getData()) return;
 //            if (null == animeResponse
@@ -29,6 +28,13 @@ public class AnimeRepository {
 //                    || animeResponse.getPagination().getStats().getCount() <= 0) return;
                     callback.operationFinished(animeResponse);
 
+                });
+
+        spec.retrieve().bodyToMono(String.class).subscribe(result -> {
+                    System.out.println(result);
+                    int startIndex = result.indexOf("\"images\":{\"jpg\":{\"image_url\":");
+                    int endIndex = result.indexOf("\"small_image_url\"");
+                    System.out.println(result.substring(startIndex+29, endIndex-1));
                 });
 
     }

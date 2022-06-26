@@ -18,7 +18,6 @@ public class AnimeService {
     }
 
     public void getAnimePaged(ResponseCallback<AnimeResponse> callback, String search, int maxResults, int startPage) {
-        System.out.println(startPage);
 
         System.out.println("fetching books in page " + startPage + "-> no. " + ((startPage - 1) * maxResults + 1)
                 + " to " + (startPage * maxResults));
