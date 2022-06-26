@@ -13,7 +13,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "detail-view", layout = MainView.class)
-@PageTitle("Book Detail")
+@PageTitle("Anime Detail")
 @CssImport("./views/detail.css")
 public class DetailView extends Div {
 

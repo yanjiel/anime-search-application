@@ -19,9 +19,9 @@ public class Item {
     @SerializedName("images")
     @Expose
     private Images images; //Images.jpg.image_url is big image, small_image_url is thumbnail
-    @SerializedName("trailer")
-    @Expose
-    private Trailer trailer;
+//    @SerializedName("trailer")
+//    @Expose
+//    private Trailer trailer;
     @SerializedName("title")
     @Expose
     private String title;
@@ -138,13 +138,13 @@ public class Item {
         this.images = images;
     }
 
-    public Trailer getTrailer() {
-        return trailer;
-    }
-
-    public void setTrailer(Trailer trailer) {
-        this.trailer = trailer;
-    }
+//    public Trailer getTrailer() {
+//        return trailer;
+//    }
+//
+//    public void setTrailer(Trailer trailer) {
+//        this.trailer = trailer;
+//    }
 
     public String getTitle() {
         return title;

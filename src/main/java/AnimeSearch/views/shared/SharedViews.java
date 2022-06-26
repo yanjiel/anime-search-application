@@ -1,14 +1,15 @@
 package AnimeSearch.views.shared;
 
-
+import java.util.Random;
 import AnimeSearch.models.FavoriteItem;
-//import AnimeSearch.models.FavoriteItemBook;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+
+import java.util.Random;
 
 @CssImport("./views/shared-views.css")
 public class SharedViews {
@@ -24,8 +25,11 @@ public class SharedViews {
 
         Image image = new Image();
 
-        System.out.println("getDetail: " + favorite.getLink());
-        image.setSrc(null == favorite.getLink() ? "https://picsum.photos/200/300" : favorite.getLink());
+        System.out.println("getDetail: " + favorite.getLink());///////////////////////////////////////////
+        Random rand = new Random();
+        int rand_int = rand.nextInt(399)+1;
+
+        image.setSrc(null == favorite.getLink() ? "https://picsum.photos/id/"+rand_int+"/200/300" : favorite.getLink());
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.addClassName("vertical-layout");
 
@@ -63,7 +67,7 @@ public class SharedViews {
         tab.addClassName("tab");
         Image image = new Image();
 
-        System.out.println("getCard: " + favorite.getLink());
+        System.out.println("getCard: " + favorite.getLink());////////////////////////////////////////
         image.setSrc(null == favorite.getLink() ? "https://picsum.photos/200/300" : favorite.getLink());
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.addClassName("vertical-layout");

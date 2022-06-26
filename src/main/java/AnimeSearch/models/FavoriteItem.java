@@ -3,7 +3,7 @@ package AnimeSearch.models;
 
 
 import java.io.Serializable;
-
+import java.util.Random;
 public class FavoriteItem implements Serializable {
 
     private String malId;
@@ -40,13 +40,24 @@ public class FavoriteItem implements Serializable {
         favoriteItem.setSynopsis(null == item.getSynopsis() ? "": item.getSynopsis());
         // set the thumbnail/link
 
-        System.out.println("small url: " + item.getImages().getJpg().getSmallImageUrl());
-        System.out.println("url: " + item.getImages().getJpg().getImageUrl());
+//        System.out.println(item.getImages().getJpg().getImageUrl());
+//        System.out.println(item.getImages().getJpg().getSmallImageUrl());
+//        System.out.println(item.getImages().getJpg().getLargeImageUrl());
+//        System.out.println(item.getImages().getWebp().getImageUrl());
+//        System.out.println(item.getImages().getWebp().getSmallImageUrl());
+//        System.out.println(item.getImages().getWebp().getLargeImageUrl());
+//        System.out.println(item.getTrailer().getImages().getImageUrl());
+//        System.out.println(item.getTrailer().getImages().getSmallImageUrl());
+//        System.out.println(item.getTrailer().getImages().getMediumImageUrl());
+//        System.out.println(item.getTrailer().getImages().getLargeImageUrl());
+//        System.out.println(item.getTrailer().getImages().getMaximumImageUrl());
 
         if( null != item.getTitle() && null != item.getImages().getJpg().getSmallImageUrl()){
             favoriteItem.setLink(item.getImages().getJpg().getSmallImageUrl());
         } else {
-            favoriteItem.setLink("https://picsum.photos/100/300");
+            Random rand = new Random();
+            int rand_int = rand.nextInt(399) + 1;
+            favoriteItem.setLink("https://picsum.photos/id/" + rand_int + "/200/300");
         }
 
         return favoriteItem;
