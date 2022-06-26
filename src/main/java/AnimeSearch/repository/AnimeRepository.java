@@ -3,7 +3,6 @@ package AnimeSearch.repository;
 import AnimeSearch.models.AnimeResponse;
 import AnimeSearch.models.Item;
 import AnimeSearch.service.ResponseCallback;
-//import net.minidev.json.JSONObject;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -40,15 +39,17 @@ public class AnimeRepository {
 
             List<Item> items = animeResponse.getData();
             for (int i = 0; i < items.size() ; i++) {
-                System.out.println(i + "th item: " + items.get(i));
+                List<String> urlList = Arrays.asList(strList.get(i).split("small_image_url"));
+                String url = urlList.get(0).replace("\"image_url\":","")
+                        .replace("{","").replace("\\","")
+                        .replace("\"","").replace(",","");
+                items.get(i).setJpgImageUrl(url);
+//                System.out.println(i + "th item: " + items.get(i));
+//                System.out.println(i + "th item: " + url);
+//                System.out.println(i + "th item: " + items.get(i).getJpgImageUrl());
             }
+            animeResponse.setData(items);
 
-//            for (String str: strList) {
-//                List<String> strLst = Arrays.asList(str.split("small_image_url"));
-//                String url = strLst.get(0).replace("\"image_url\":","")
-//                        .replace("{","").replace("\\","")
-//                        .replace("\"","").replace(",","");
-//            }
 
             callback.operationFinished(animeResponse);
         });

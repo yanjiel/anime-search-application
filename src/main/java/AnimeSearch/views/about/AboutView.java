@@ -61,8 +61,7 @@ public class AboutView extends Div {
 
     public void sendEmail(String subject, String message)  {
         Notification success = new Notification(new Html(String.format(
-                "<div class='email-sent-success'><h3>Successfully Sent Message</h3><h4>%s</h4><p>%s</p><div/>", subject,
-                message)));
+                "<div class='email-sent-success'><h3>Successfully Sent Message</h3><div/>")));
 
         success.setDuration(3000);
         success.setPosition(Notification.Position.BOTTOM_CENTER);

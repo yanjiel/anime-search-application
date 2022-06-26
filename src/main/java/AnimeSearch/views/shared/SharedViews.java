@@ -42,7 +42,7 @@ public class SharedViews {
         synopsis.addClassName("text");
         Span email = getProperSpan(favorite.getUserEmail());
         email.addClassName("text");
-        Span score = getProperSpan("Score: " + favorite.getScore());
+        Span score = getProperSpan("Score: " + (null == favorite.getScore() || favorite.getScore() == "" ? "N/A" : favorite.getScore()));
         score.addClassName("text");
 
         if (favMode) {
@@ -82,7 +82,7 @@ public class SharedViews {
         synopsis.addClassName("text");
         Span email = getProperSpan(favorite.getUserEmail());
         email.addClassName("text");
-        Span score = getProperSpan("Score: " + favorite.getScore());
+        Span score = getProperSpan("Score: " + (null == favorite.getScore() || favorite.getScore() == "" ? "N/A" : favorite.getScore()));
         score.addClassName("text");
 
 

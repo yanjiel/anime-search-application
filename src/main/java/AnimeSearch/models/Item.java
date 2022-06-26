@@ -3,7 +3,7 @@ package AnimeSearch.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+import java.util.Random;
 import javax.annotation.Generated;
 import java.util.List;
 
@@ -388,6 +388,23 @@ public class Item {
 
     public void setDemographics(List<Demographic> demographics) {
         this.demographics = demographics;
+    }
+
+    public void setJpgImageUrl(String url) {
+        if (null == url) {
+            Random rand = new Random();
+            int rand_int = rand.nextInt(399) + 1;
+            url = "https://picsum.photos/id/" + rand_int + "/200/300";
+        }
+        Images img = this.getImages();
+        Jpg jpg = img.getJpg();
+        jpg.setImageUrl(url);
+        img.setJpg(jpg);
+        this.setImages(img);
+    }
+
+    public String getJpgImageUrl() {
+        return this.getImages().getJpg().getImageUrl();
     }
 
     @Override
