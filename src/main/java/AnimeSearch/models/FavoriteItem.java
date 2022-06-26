@@ -64,7 +64,6 @@ public class FavoriteItem implements Serializable {
     }
 
 
-
     public String getMalId() {
         return malId;
     }
