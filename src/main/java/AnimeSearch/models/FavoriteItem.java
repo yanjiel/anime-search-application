@@ -39,6 +39,10 @@ public class FavoriteItem implements Serializable {
 
         favoriteItem.setSynopsis(null == item.getSynopsis() ? "": item.getSynopsis());
         // set the thumbnail/link
+
+        System.out.println("small url: " + item.getImages().getJpg().getSmallImageUrl());
+        System.out.println("url: " + item.getImages().getJpg().getImageUrl());
+
         if( null != item.getTitle() && null != item.getImages().getJpg().getSmallImageUrl()){
             favoriteItem.setLink(item.getImages().getJpg().getSmallImageUrl());
         } else {

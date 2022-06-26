@@ -24,6 +24,7 @@ public class SharedViews {
 
         Image image = new Image();
 
+        System.out.println("getDetail: " + favorite.getLink());
         image.setSrc(null == favorite.getLink() ? "https://picsum.photos/200/300" : favorite.getLink());
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.addClassName("vertical-layout");
@@ -31,13 +32,13 @@ public class SharedViews {
 
         Span title = getProperSpan(favorite.getTitle());
         title.addClassNames("text", "title");
-        Span type = getProperSpan(favorite.getType());
+        Span type = getProperSpan("Type: " + favorite.getType());
         type.addClassName("text");
         Span synopsis = getProperSpan(favorite.getSynopsis());
         synopsis.addClassName("text");
         Span email = getProperSpan(favorite.getUserEmail());
         email.addClassName("text");
-        Span score = getProperSpan(favorite.getScore());
+        Span score = getProperSpan("Score: " + favorite.getScore());
         score.addClassName("text");
 
         if (favMode) {
@@ -62,6 +63,7 @@ public class SharedViews {
         tab.addClassName("tab");
         Image image = new Image();
 
+        System.out.println("getCard: " + favorite.getLink());
         image.setSrc(null == favorite.getLink() ? "https://picsum.photos/200/300" : favorite.getLink());
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.addClassName("vertical-layout");
@@ -70,13 +72,13 @@ public class SharedViews {
 
         Span title = getProperSpan(favorite.getTitle());
         title.addClassNames("text", "title");
-        Span type = getProperSpan(favorite.getType());
+        Span type = getProperSpan("Type: " + favorite.getType());
         type.addClassName("text");
         Span synopsis = getProperSpan(favorite.getSynopsis());
         synopsis.addClassName("text");
         Span email = getProperSpan(favorite.getUserEmail());
         email.addClassName("text");
-        Span score = getProperSpan(favorite.getScore());
+        Span score = getProperSpan("Score: " + favorite.getScore());
         score.addClassName("text");
 
 

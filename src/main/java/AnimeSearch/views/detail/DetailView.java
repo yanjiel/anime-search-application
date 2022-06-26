@@ -43,13 +43,15 @@ public class DetailView extends Div {
 //                }
 //        ));
 
-        goBack.setText(Cache.getInstance().isFavMode() ? "Return to Favorites" : "Return to Book Search");
+//        goBack.setText(Cache.getInstance().isFavMode() ? "Return to Favorites" : "Return to Anime Search");
+        goBack.setText("Return to Anime Search");
         goBack.addClickListener(
                 e -> goBack.getUI().ifPresent(ui -> {
-                            if (Cache.getInstance().isFavMode())
-                                ui.navigate("favorites");
-                            else
-                                ui.navigate("book-search");
+//                            if (Cache.getInstance().isFavMode())
+//                                ui.navigate("favorites");
+//                            else
+//                                ui.navigate("anime-search");
+                            ui.navigate("anime-search");
                         }
                 ));
     }

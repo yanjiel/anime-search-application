@@ -129,7 +129,7 @@ public class AnimeView extends Div implements AfterNavigationObserver {
     public void executeSearch(String searchFor) {
 
         Cache.getInstance().setKeyword(searchFor);
-        Cache.getInstance().setOffset(0);
+        Cache.getInstance().setOffset(1);
         Cache.getInstance().clearItems();
         getPlaces(searchFor);
     }
