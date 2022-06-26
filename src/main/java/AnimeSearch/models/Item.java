@@ -162,7 +162,6 @@ public class Item {
 //        this.titleEnglish = titleEnglish;
 //    }
 
-
     public String getTitleEnglish() {return titleEnglish;}
 
     public void setTitleEnglish(String titleEnglish) {this.titleEnglish = titleEnglish;}
