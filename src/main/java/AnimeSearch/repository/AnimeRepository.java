@@ -1,12 +1,14 @@
 package AnimeSearch.repository;
 
 import AnimeSearch.models.AnimeResponse;
+import AnimeSearch.models.Item;
 import AnimeSearch.service.ResponseCallback;
 //import net.minidev.json.JSONObject;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Repository
 public class AnimeRepository {
@@ -33,12 +35,21 @@ public class AnimeRepository {
                 });
 
         spec.retrieve().bodyToMono(String.class).subscribe(result -> {
-            String[] urls = result.split("\"jpg\":");
-            String[] urls_2 = Arrays.copyOfRange(result.split("\"jpg\":"),1,urls.length+1 );
+            String[] strArr = result.split("\"jpg\":");
+            List<String> strList = Arrays.asList(Arrays.copyOfRange(strArr,1,strArr.length));
 
-            for (String url: urls_2) {
-                System.out.println(url);
+            List<Item> items = animeResponse.getData();
+            for (int i = 0; i < items.size() ; i++) {
+                System.out.println(i + "th item: " + items.get(i));
             }
+
+//            for (String str: strList) {
+//                List<String> strLst = Arrays.asList(str.split("small_image_url"));
+//                String url = strLst.get(0).replace("\"image_url\":","")
+//                        .replace("{","").replace("\\","")
+//                        .replace("\"","").replace(",","");
+//            }
+
             callback.operationFinished(animeResponse);
         });
 
